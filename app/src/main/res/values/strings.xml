@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Proyecto Final</string>
+    <string name="nombre_usuario">Nombre de Usuario</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="logo">FORSCHER</string>
+    <string name="cambiar_foto">Seleccionar Imagen</string>
+    <string name="quitar_foto">Quitar Imagen</string>
+    <string name="registrar">Registrar</string>
+    <string name="descripcion">Descripción</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="nombres">Nombres</string>
+    <string name="rol">Rol</string>
+    <string name="centro_educativo">Centro Educativo</string>
+    <string name="programa">Programa</string>
+    <string name="materia">Materia</string>
+    <string name="facultad">Facultad</string>
+    <string name="genero">Género</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_home_">Home_Activity</string>
+</resources>
