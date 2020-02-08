@@ -1,5 +1,7 @@
 package com.example.proyectofinal.estructura_de_datos;
 import java.io.Serializable;
+import java.security.Key;
+
 public class HashTable<T> implements Serializable {
     public int size, indice, ocupados;
     public float porcentaje, factor;
@@ -59,7 +61,7 @@ public class HashTable<T> implements Serializable {
         }
         return tmp;
     }
-    public void Insert( String dato){
+    public void Insert( String dato, String key){
         boolean insertado = false;
         if (porcentaje<=73.0f){
             for(int i = 0; i< size; i++){
@@ -68,6 +70,7 @@ public class HashTable<T> implements Serializable {
                     posicion -=size;
                 } if ( vector[posicion]== null || vector[posicion].estado==true){
                     vector[posicion]=new NodoHash(dato);
+                    vector[posicion].Key=key;
                     ocupados+=1;
                     porcentaje=(this.ocupados*100)/ this.size;
                     insertado= true;
@@ -82,13 +85,13 @@ public class HashTable<T> implements Serializable {
                 }
             }
             if (insertado == true){
-                System.out.println("El dato se inserto correctamente: "+ dato);
+                System.out.println("El dato se inserto correctamente: "+ dato +" con la contraseña; "+ key);
             } else {
                 System.out.println("El dato no se pudo insertar : "+ dato);
             }
         }else{
             rehashing();
-            Insert(dato);
+            Insert(dato,key);
         }
     }
     public void rehashing(){
@@ -105,10 +108,13 @@ public class HashTable<T> implements Serializable {
         ocupados=0;
         porcentaje = (ocupados*100)/size;
         for (int i = 0 ; i <tamano ;i++){
-            Insert(tmp[i].dato);
+            Insert(tmp[i].dato, tmp[i].Key);
         }
         System.out.println("Rehashing realizado");
     }
+
+
+
     public NodoHash Sacar (String dato){
         boolean find = false;
         NodoHash tmp = null;
@@ -133,5 +139,11 @@ public class HashTable<T> implements Serializable {
             System.out.println("No se encontro el dato :"+dato+" en la tabla.");
             return null;
         }
+    }
+    public boolean Iniciar (String id, String Pas){
+        NodoHash ID = Sacar(id);
+        if (ID.Key.equals(Pas)){
+            return true;
+        } else { return false;}
     }
 }

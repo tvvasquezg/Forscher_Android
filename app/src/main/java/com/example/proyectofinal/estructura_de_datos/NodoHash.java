@@ -3,12 +3,13 @@ import java.io.Serializable;
 public class NodoHash<T> implements Serializable{
     public String dato;
     boolean estado;
-    int  Key;
+    String  Key;
     int tam;
     public NodoHash(String dato){
         this.dato= dato;
         this.estado= true;
     }
+
     public  NodoHash(int t){
         this.tam = t;
         this.estado = true;
@@ -28,7 +29,7 @@ public class NodoHash<T> implements Serializable{
 
     public int getTam() { return tam; }
 
-    public int getKey() { return Key; }
+    public String getKey() { return Key; }
 
 }
 
