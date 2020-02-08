@@ -16,16 +16,19 @@ public class HashSearch<T> implements Serializable {
         return t;
     }
 
-    public int FunctionHash(String key, HashSearch h){
-        int hashVal =0;
+    public int FunctionHash(String key, HashSearch h1){
+        int hashVa =0;
         for (int i= 0; i < key.length();i++){
-            hashVal = 45* hashVal+ key.charAt(i);
+            hashVa = 45* hashVa+ key.charAt(i);
         }
-        hashVal %= h.size;
-        if(hashVal<0){
-            hashVal += h.size;
+        hashVa %= h1.size;
+        if(hashVa<0){
+            hashVa += h1.size;
         }
-        return hashVal;
+        else{
+            System.out.println("Commit");
+        }
+        return hashVa;
     }
 
 }
