@@ -15,7 +15,7 @@ public class HashTable<T> implements Serializable {
         this.size = 997;
         this.vector = new NodoHash[size];
         this.porcentaje = (this.ocupados*100)/ this.size;
-
+        this.tam = 1;
     }
     public int F1(int x){ return x%size; }
     public int F2 (int x) { return 1+ (x%(size-1));}
@@ -24,7 +24,9 @@ public class HashTable<T> implements Serializable {
         return F1(x)+(f*F2(x)%size);
     }
     public int size(){
+        this.tam ++;
         return (int) Math.pow(this.size,2)+this.size+41;
+
     }
     public int key (String id){
         String codigo ="";
@@ -101,9 +103,9 @@ public class HashTable<T> implements Serializable {
     public void rehashing(){
         NodoHash[] tmp = vector;
         int tamano = size;
-        if ( indice <tam){
+        if ( indice <=tam){
             indice += 1;
-
+            if (indice == tam){tam++;}
         }
         size= size();
         vector = new NodoHash[size];

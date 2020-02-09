@@ -109,7 +109,7 @@ public class ArbolAVL<T> implements Serializable {
                 }
             }
         }else{
-            System.out.println("Usuario Duplicado");
+            System.out.println("Usuario Duplicada");
         }
         //actualizar altura
         if((subarbol.hijoizquierdo==null)&&(subarbol.hijoderecho!=null)){
