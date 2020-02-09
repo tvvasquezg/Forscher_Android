@@ -1,4 +1,6 @@
 package com.example.proyectofinal.estructura_de_datos;
+import com.example.proyectofinal.logica.Persona;
+
 import java.io.Serializable;
 import java.security.Key;
 import java.util.*;
@@ -7,8 +9,11 @@ public class HashTable<T> implements Serializable {
     public int size, indice, ocupados, tam;
     public float porcentaje, factor;
     public NodoHash[] vector;
+    public Comparator comparador;
 
-    public HashTable(){
+
+    public HashTable(Comparator comparador){
+        this.comparador =comparador;
         this.indice = 0;
         this.ocupados= 0;
         this.factor=73.0f;
@@ -67,8 +72,10 @@ public class HashTable<T> implements Serializable {
         }
         return tmp;
     }
-    public void Insert( T Dato){
-        String dato =(String) Dato;
+
+
+    public void Insert( Persona Dato){
+        String dato = Dato.idUsuario;
         boolean insertado = false;
         if (porcentaje<=73.0f){
             for(int i = 0; i< size; i++){
@@ -76,7 +83,7 @@ public class HashTable<T> implements Serializable {
                 if (posicion>size){
                     posicion -=size;
                 } if ( vector[posicion]== null || vector[posicion].estado==true){
-                    vector[posicion]=new NodoHash(dato);
+                    vector[posicion]=new NodoHash(Dato,dato);
                     ocupados+=1;
                     porcentaje=(this.ocupados*100)/ this.size;
                     insertado= true;
@@ -112,7 +119,7 @@ public class HashTable<T> implements Serializable {
         ocupados=0;
         porcentaje = (ocupados*100)/size;
         for (int i = 0 ; i <tamano ;i++){
-            Insert((T) tmp[i].dato);
+            Insert(tmp[i].dato);
         }
         System.out.println("Rehashing realizado");
     }
@@ -144,10 +151,5 @@ public class HashTable<T> implements Serializable {
             return null;
         }
     }
-    public boolean Iniciar (String id, String Pas){
-        NodoHash ID = Sacar(id);
-        if (ID.Key.equals(Pas)){
-            return true;
-        } else { return false;}
-    }
+
 }

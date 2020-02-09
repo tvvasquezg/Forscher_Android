@@ -1,19 +1,17 @@
 package com.example.proyectofinal.estructura_de_datos;
+import com.example.proyectofinal.logica.Persona;
+
 import java.io.Serializable;
 public class NodoHash<T> implements Serializable{
-    public T dato;
+    public Persona dato;
     boolean estado;
-    String  Key;
-    int tam;
-    public NodoHash(T dato){
+    String comparador;
+    public NodoHash(Persona dato, String comparador){
         this.dato= dato;
         this.estado= true;
+        this.comparador = comparador;
     }
 
-    public  NodoHash(int t){
-        this.tam = t;
-        this.estado = true;
-    }
 
     public boolean getEstado() {
         return estado;
@@ -23,13 +21,18 @@ public class NodoHash<T> implements Serializable{
         this.estado = c;
     }
 
-    public T getDato() {
+    public Persona getDato() {
         return dato;
     }
 
-    public int getTam() { return tam; }
+    public String getComparador() {
+        return comparador;
+    }
 
-    public String getKey() { return Key; }
+    public void setComparador(String comparador) {
+        this.comparador = comparador;
+    }
+
 
 }
 
