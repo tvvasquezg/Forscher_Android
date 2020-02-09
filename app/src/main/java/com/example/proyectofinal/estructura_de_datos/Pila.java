@@ -2,10 +2,10 @@ package com.example.proyectofinal.estructura_de_datos;
 
 public class Pila<T> {
     private NodoPila<T> top;
-    private int size;
+    private int tam;
 
     public int size() {
-        return size;
+        return tam;
     }
 
     public boolean isEmpty() {
@@ -15,7 +15,7 @@ public class Pila<T> {
     public void push(T key) {
         NodoPila<T> nodo = new NodoPila<>(key, this.top);
         this.top = nodo;
-        size++;
+        tam++;
     }
 
     public NodoPila<T> pop() {
@@ -28,7 +28,7 @@ public class Pila<T> {
 
         temp = this.top;
         this.top = this.top.getNext();
-        size--;
+        tam--;
         return temp;
     }
 
