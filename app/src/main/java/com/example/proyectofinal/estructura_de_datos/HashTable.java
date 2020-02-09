@@ -4,10 +4,10 @@ import java.security.Key;
 import java.util.*;
 
 public class HashTable<T> implements Serializable {
-    public int size, indice, ocupados;
+    public int size, indice, ocupados, tam;
     public float porcentaje, factor;
     public NodoHash[] vector;
-    public HashTable[] Psize;
+
     public HashTable(){
         this.indice = 0;
         this.ocupados= 0;
@@ -15,6 +15,7 @@ public class HashTable<T> implements Serializable {
         this.size = 997;
         this.vector = new NodoHash[size];
         this.porcentaje = (this.ocupados*100)/ this.size;
+
     }
     public int F1(int x){ return x%size; }
     public int F2 (int x) { return 1+ (x%(size-1));}
@@ -22,7 +23,7 @@ public class HashTable<T> implements Serializable {
         int x = key(id);
         return F1(x)+(f*F2(x)%size);
     }
-    public int size(HashTable[] h){
+    public int size(){
         return (int) Math.pow(this.size,2)+this.size+41;
     }
     public int key (String id){
@@ -100,13 +101,11 @@ public class HashTable<T> implements Serializable {
     public void rehashing(){
         NodoHash[] tmp = vector;
         int tamano = size;
-        if ( indice <Psize.length){
+        if ( indice <tam){
             indice += 1;
-            if (indice==Psize.length-1){
-                System.out.println("WARNING: Se llego al maximo tamano del arreglo");
-            }
+
         }
-        size= size(Psize);
+        size= size();
         vector = new NodoHash[size];
         ocupados=0;
         porcentaje = (ocupados*100)/size;
