@@ -5,45 +5,42 @@ import java.io.Serializable;
 import java.util.*;
 
 public class HashTable<T> implements Serializable {
-    public int size, indice, ocupados, tam;
+    public int size, indice, ocupados;
     public float porcentaje, factor;
     public NodoHash[] vector;
     public Comparator comparador;
 
 
-    public HashTable(Comparator comparador){
-        this.comparador =comparador;
+
+    public HashTable() {
+        this.comparador = null;
         this.indice = 0;
         this.ocupados= 0;
         this.factor=73.0f;
         this.size = 997;
         this.vector = new NodoHash[size];
         this.porcentaje = (this.ocupados*100)/ this.size;
-        this.tam = 1;
+
     }
-    public int F1(int x){ return x%size; }
+
+    /*public int F1(int x){ return x%size; }
     public int F2 (int x) { return 1+ (x%(size-1));}
     public int DobleHashing (int f, String id){
         int x = key(id);
         return F1(x)+(f*F2(x)%size);
-    }
+    }*/
     public int size(){
-        this.tam ++;
         return (int) Math.pow(this.size,2)+this.size+41;
+    }
+    public int DobleHashing (String id){
+        int n = id.length();
+        int m = 27;
+        int z = (int) Math.pow(n, m);
+        int c =((n + 1) % m);
+        return n+(z*(c-1)%m);
+    }
 
-    }
-    public int key (String id){
-        String codigo ="";
-        for(int i= 0;i<id.length();i++){
-            codigo += id.codePointAt(i);
-        }
-        if ( id.length()<9){
-            return reduccion(codigo);
-        } else {
-            return Integer.parseInt(codigo);
-        }
-    }
-    public int reduccion(String id){
+    /*public int reduccion(String id){
         int tmp = 0;
         while(id.length()>9){
             String ax ="";
@@ -70,7 +67,7 @@ public class HashTable<T> implements Serializable {
             id ="";
         }
         return tmp;
-    }
+    }*/
 
 
     public void Insert( Persona Dato){
@@ -78,11 +75,10 @@ public class HashTable<T> implements Serializable {
         boolean insertado = false;
         if (porcentaje<=73.0f){
             for(int i = 0; i< size; i++){
-                int posicion = DobleHashing(i,dato);
-                if (posicion>size){
-                    posicion -=size;
-                } if ( vector[posicion]== null || vector[posicion].estado==true){
-                    vector[posicion]=new NodoHash(Dato,dato);
+                int posicion = DobleHashing(dato);
+                if ( vector[posicion]== null || vector[posicion].estado==0 || vector[posicion].estado==1){
+                    System.out.println();
+                    vector[posicion]=new NodoHash(Dato);
                     ocupados+=1;
                     porcentaje=(this.ocupados*100)/ this.size;
                     insertado= true;
@@ -109,10 +105,7 @@ public class HashTable<T> implements Serializable {
     public void rehashing(){
         NodoHash[] tmp = vector;
         int tamano = size;
-        if ( indice <=tam){
-            indice += 1;
-            if (indice == tam){tam++;}
-        }
+        indice += 1;
         size= size();
         vector = new NodoHash[size];
         ocupados=0;
@@ -130,13 +123,16 @@ public class HashTable<T> implements Serializable {
         NodoHash tmp = null;
         int pos = 0;
         for (int i = 0;i<size;i++){
-            int posicion = DobleHashing(i,dato);
+            int posicion = DobleHashing(dato);
+
             if (posicion>=size){
                 posicion-= size;
                 pos = posicion;
+                System.out.println("1");
             }
             if(vector[posicion]!=null){
                 if(vector[posicion].dato.idUsuario.equals(dato)){
+
                     tmp = vector[posicion];
                     find = true;
                     break;
