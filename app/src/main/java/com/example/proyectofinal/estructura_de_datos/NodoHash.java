@@ -1,11 +1,11 @@
 package com.example.proyectofinal.estructura_de_datos;
 import java.io.Serializable;
 public class NodoHash<T> implements Serializable{
-    public String dato;
+    public T dato;
     boolean estado;
     String  Key;
     int tam;
-    public NodoHash(String dato){
+    public NodoHash(T dato){
         this.dato= dato;
         this.estado= true;
     }
@@ -23,7 +23,7 @@ public class NodoHash<T> implements Serializable{
         this.estado = c;
     }
 
-    public String getDato() {
+    public T getDato() {
         return dato;
     }
 

@@ -1,18 +1,18 @@
 package com.example.proyectofinal.estructura_de_datos;
 import java.io.Serializable;
 import java.security.Key;
+import java.util.*;
 
 public class HashTable<T> implements Serializable {
     public int size, indice, ocupados;
     public float porcentaje, factor;
-    public int[] sizes;
     public NodoHash[] vector;
-    public HashTable (){
-        this.sizes = new int[] {269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,997,12119,15559,25307,40343,74567,104003,104729};
+    public HashTable[] Psize;
+    public HashTable(){
         this.indice = 0;
         this.ocupados= 0;
         this.factor=73.0f;
-        this.size = this.sizes[indice];
+        this.size = 997;
         this.vector = new NodoHash[size];
         this.porcentaje = (this.ocupados*100)/ this.size;
     }
@@ -21,6 +21,9 @@ public class HashTable<T> implements Serializable {
     public int DobleHashing (int f, String id){
         int x = key(id);
         return F1(x)+(f*F2(x)%size);
+    }
+    public int size(HashTable[] h){
+        return (int) Math.pow(this.size,2)+this.size+41;
     }
     public int key (String id){
         String codigo ="";
@@ -61,7 +64,8 @@ public class HashTable<T> implements Serializable {
         }
         return tmp;
     }
-    public void Insert( String dato, String key){
+    public void Insert( T Dato){
+        String dato =(String) Dato;
         boolean insertado = false;
         if (porcentaje<=73.0f){
             for(int i = 0; i< size; i++){
@@ -70,7 +74,6 @@ public class HashTable<T> implements Serializable {
                     posicion -=size;
                 } if ( vector[posicion]== null || vector[posicion].estado==true){
                     vector[posicion]=new NodoHash(dato);
-                    vector[posicion].Key=key;
                     ocupados+=1;
                     porcentaje=(this.ocupados*100)/ this.size;
                     insertado= true;
@@ -85,30 +88,30 @@ public class HashTable<T> implements Serializable {
                 }
             }
             if (insertado == true){
-                System.out.println("El dato se inserto correctamente: "+ dato +" con la contraseña; "+ key);
+                System.out.println("El dato se inserto correctamente: "+ dato);
             } else {
                 System.out.println("El dato no se pudo insertar : "+ dato);
             }
         }else{
             rehashing();
-            Insert(dato,key);
+            Insert(Dato);
         }
     }
     public void rehashing(){
         NodoHash[] tmp = vector;
         int tamano = size;
-        if ( indice <sizes.length){
+        if ( indice <Psize.length){
             indice += 1;
-            if (indice==sizes.length-1){
+            if (indice==Psize.length-1){
                 System.out.println("WARNING: Se llego al maximo tamano del arreglo");
             }
         }
-        size=sizes[indice];
+        size= size(Psize);
         vector = new NodoHash[size];
         ocupados=0;
         porcentaje = (ocupados*100)/size;
         for (int i = 0 ; i <tamano ;i++){
-            Insert(tmp[i].dato, tmp[i].Key);
+            Insert((T) tmp[i].dato);
         }
         System.out.println("Rehashing realizado");
     }
