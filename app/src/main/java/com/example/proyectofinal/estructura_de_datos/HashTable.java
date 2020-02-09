@@ -2,7 +2,6 @@ package com.example.proyectofinal.estructura_de_datos;
 import com.example.proyectofinal.logica.Persona;
 
 import java.io.Serializable;
-import java.security.Key;
 import java.util.*;
 
 public class HashTable<T> implements Serializable {
@@ -89,7 +88,7 @@ public class HashTable<T> implements Serializable {
                     insertado= true;
                     break;
                 } else {
-                    if(vector[posicion].dato.equals(dato)){
+                    if(vector[posicion].dato.idUsuario.equals(dato)){
                         System.out.println("El dato a insertar ya existe en la tabla: "+ dato);
                         break;
                     }else {
@@ -137,7 +136,7 @@ public class HashTable<T> implements Serializable {
                 pos = posicion;
             }
             if(vector[posicion]!=null){
-                if(vector[posicion].dato.equals(dato)){
+                if(vector[posicion].dato.idUsuario.equals(dato)){
                     tmp = vector[posicion];
                     find = true;
                     break;
