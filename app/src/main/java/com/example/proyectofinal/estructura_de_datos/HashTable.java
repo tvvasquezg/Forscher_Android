@@ -107,6 +107,19 @@ public class HashTable<T> implements Serializable {
                     tmp = vector[posicion];
                     find = true;
                     break;
+                } else{
+                    NodoHash tm = vector[posicion];
+                    NodoHash n = tm.next;
+                    int indice = (int) Math.pow(10, 30);
+                    for(int j=0;j<indice;j++){
+                        if(n.dato.idUsuario.equals(dato)){
+                            tmp = n;
+                            find = true;
+                            break;
+                        }
+                        tm = n;
+                        n= tm.next;
+                    }
                 }
             }
         }
@@ -117,7 +130,6 @@ public class HashTable<T> implements Serializable {
             return null;
         }
     }
-
 
 
 
