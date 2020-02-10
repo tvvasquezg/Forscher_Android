@@ -4,15 +4,19 @@ import com.example.proyectofinal.logica.Persona;
 import java.io.Serializable;
 public class NodoHash<T> implements Serializable{
     public Persona dato;
-    int estado; //0 = Vacío, 1 = Eliminado, 2 = Ocupado
+    boolean estado; //0 = Vacío, 1 = Eliminado, 2 = Ocupado
     int position;
     String key;
     NodoHash next;
 
     public NodoHash(Persona dato){
         this.dato= dato;
-        this.estado= 0;
+        this.estado= true;
         this.key = dato.idUsuario;
+    }
+    void agregarDelante(Persona o, NodoHash c){
+        NodoHash nuevo = new NodoHash(o);
+        c.next = nuevo;
     }
 
     public String getKey() {
@@ -20,11 +24,11 @@ public class NodoHash<T> implements Serializable{
     }
 
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int c) {
+    public void setEstado(boolean c) {
         this.estado = c;
     }
 
@@ -36,5 +40,11 @@ public class NodoHash<T> implements Serializable{
         return dato;
     }
 
+    public NodoHash getNext() {
+        return next;
+    }
+
+
 }
+
 
